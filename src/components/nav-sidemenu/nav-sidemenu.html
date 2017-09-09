@@ -1,0 +1,21 @@
+<ion-menu [content]="content">
+  <ion-header class="sidemenu-header">
+    <ion-row>
+      menu
+    </ion-row>
+  </ion-header>
+
+  <ion-content>
+    <ion-list padding-top  class="sidemenu-list">
+      <button ion-item menuClose (click)="openPage('StatsPage')"><ion-icon name="home" item-start></ion-icon>
+        Stats
+      </button>
+      <button ion-item menuClose (click)="openPage('WalletPage')"><ion-icon name="apps" item-start></ion-icon>
+        Wallet
+      </button>
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+<ion-nav #content [root]="rootPage"></ion-nav>
