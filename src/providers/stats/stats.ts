@@ -1,9 +1,15 @@
 import {Inject, Injectable} from '@angular/core';
+import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-import {Http} from "@angular/http";
 import {APP_CONFIG, IAppConfig} from "../../app/app.config";
+import {Observable} from "rxjs/Observable";
+import 'rxjs/add/observable/throw';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/finally';
 
-/*
+import {ConsumptionStats} from "../../models/consumption-stats";
+
+/*import 'rxjs/add/operator/catch';
   Generated class for the StatsProvider provider.
 
   See https://angular.io/docs/ts/latest/guide/dependency-injection.html
@@ -16,5 +22,31 @@ export class StatsProvider {
     console.log('Hello StatsProvider Provider');
 
   }
+
+  getHourlyData() {}
+
+  getMonthlyData() {
+    let currentDate = new Date();
+
+    let to = {
+      month: currentDate.getUTCMonth() + 1,
+      day: currentDate.getUTCDate(),
+      year: currentDate.getUTCFullYear()
+    };
+    let from = {
+      month: currentDate.getUTCMonth() + 1,
+      day: currentDate.getUTCDate(),
+      year: currentDate.getUTCFullYear() - 1
+    };
+
+
+    return this.http.get(this.config.apiEndpoint + `date?from_date=${from.year}-${from.month}-${from.day}&to_date=${to.year}-${to.month}-${to.day}&limit=5`)
+      .map(res =>  <ConsumptionStats[]>res.json())
+      .catch((err:Response) => {
+        return Observable.throw(err.json());
+      });
+  }
+
+  getYearlyData() {}
 
 }

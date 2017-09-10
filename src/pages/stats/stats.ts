@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {ChartType} from "../../components/line-chart/chart-type";
 import {DummyDataProvider} from "../../providers/dummydata";
 import {StatsProvider} from "../../providers/stats/stats";
+import {ConsumptionStats} from "../../models/consumption-stats";
 
 /**
  * Generated class for the StatsPage page.
@@ -21,6 +22,7 @@ export class StatsPage {
   chartType:ChartType = ChartType.HOURLY;
 
   public lineChartData:Array<any>;
+  public tempChartData:Array<ConsumptionStats>;
 
   constructor(public navCtrl: NavController, private dummyData: DummyDataProvider, private statsProvider: StatsProvider) {
     this.lineChartData =  this.dummyData.getHourlyChartData();
@@ -36,6 +38,14 @@ export class StatsPage {
       }
       case 'monthly': {
         this.chartType = ChartType.MONTHLY;
+        // this.statsProvider.getMonthlyData().subscribe((data)=>{
+        //   this.lineChartData = data.map(function(a) {return a.energy;});
+        //
+        //   let testSorted = data.sort((a, b) => a.time - b.time);
+        //   console.log(testSorted);
+        //
+        //   console.log(this.lineChartData);
+        // });
         this.lineChartData = this.dummyData.getMonthlyChartData();
         break;
       }
@@ -45,6 +55,23 @@ export class StatsPage {
         break;
       }
     }
+  }
+
+  convertDialyToMonthly(data: ConsumptionStats[]) {
+    let monthlyData:ConsumptionStats[];
+    let months:any[];
+    for (let day in data) {
+        months.push(
+
+        )
+    }
+  }
+
+  testApi(){
+    this.statsProvider.getMonthlyData().subscribe((data)=>{
+      this.tempChartData = data;
+      console.log(this.tempChartData);
+    });
   }
 
   ionViewDidLoad() {

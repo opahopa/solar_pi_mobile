@@ -32,6 +32,9 @@
     </ion-segment>
   </div>
 
+  <ion-buttons>
+    <button (click)="testApi()">test</button>
+  </ion-buttons>
   <div [ngSwitch]="dataPeriodSegment"> {{chartType[chartType]}}
     <div *ngSwitchCase="'hourly'">
       <div style="display: block;">
