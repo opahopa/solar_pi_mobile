@@ -11,6 +11,7 @@ import { StatsProvider } from '../providers/stats/stats';
 import {DummyDataProvider} from "../providers/dummydata";
 import {APP_CONFIG, AppConfig} from "./app.config";
 import {HttpModule} from "@angular/http";
+import {Ng2CableModule} from "ng2-cable";
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import {HttpModule} from "@angular/http";
   imports: [
     BrowserModule,
     HttpModule,
+    Ng2CableModule,
     CoreModule.forRoot(),
     IonicModule.forRoot(MyApp),
     ChartsModule
