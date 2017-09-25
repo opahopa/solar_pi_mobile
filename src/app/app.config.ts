@@ -7,5 +7,5 @@ export interface IAppConfig {
 }
 
 export const AppConfig: IAppConfig = {
-  apiEndpoint: "http://solarpi.herokuapp.com/api/v1/solar/",
+  apiEndpoint: "https://solarpi.herokuapp.com/api/v1/",
 };

@@ -12,6 +12,7 @@ import {DummyDataProvider} from "../providers/dummydata";
 import {APP_CONFIG, AppConfig} from "./app.config";
 import {HttpModule} from "@angular/http";
 import {Ng2CableModule} from "ng2-cable";
+import { WalletProvider } from '../providers/wallet/wallet';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {Ng2CableModule} from "ng2-cable";
     {provide: APP_CONFIG, useValue: AppConfig},
     StatsProvider,
     DummyDataProvider,
-    StatsProvider
+    StatsProvider,
+    WalletProvider
   ]
 })
 export class AppModule {}

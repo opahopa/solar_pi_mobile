@@ -5,7 +5,6 @@ import {APP_CONFIG, IAppConfig} from "../../app/app.config";
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/finally';
 
 import {ConsumptionStats} from "../../models/consumption-stats";
 
@@ -40,8 +39,8 @@ export class StatsProvider {
     };
 
 
-    return this.http.get(this.config.apiEndpoint + `date?from_date=${from.year}-${from.month}-${from.day}&to_date=${to.year}-${to.month}-${to.day}&limit=5`)
-      .map(res =>  <ConsumptionStats[]>res.json())
+    return this.http.get(this.config.apiEndpoint + `/stat/date?from_date=${from.year}-${from.month}-${from.day}&to_date=${to.year}-${to.month}-${to.day}&limit=5`)
+      .map(res => <ConsumptionStats[]>res.json())
       .catch((err:Response) => {
         return Observable.throw(err.json());
       });
