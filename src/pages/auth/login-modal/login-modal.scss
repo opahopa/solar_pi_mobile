@@ -1,0 +1,51 @@
+page-login-modal {
+
+  .fbLogin {
+    background-color: #4267b2;
+  }
+  .fbLogin, .googleLogin {
+    text-transform: none;
+    width: 100%;
+
+    ion-icon {
+      font-size: 2em;
+    }
+    .socialLoginBtnText {
+      margin-left: 30px;
+    }
+    .button-inner{
+      justify-content: flex-start;
+    }
+  }
+
+  .emailBtn {
+    span {
+      color: color($colors, primary);
+    }
+  }
+
+  .item-wp ion-icon[item-left] {
+    margin-top: 40px;
+  }
+
+  //logo
+  img {
+    width: 70%;
+    height: auto;
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  .text-split {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    padding: 24px;
+    margin: 0px 28px 0px 28px;
+
+    @include bg-strike(color($colors, light-grey));
+    color: color($colors, light-grey);
+  }
+}
+
+

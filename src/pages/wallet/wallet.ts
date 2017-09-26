@@ -20,7 +20,8 @@ export class WalletPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, @Inject(APP_CONFIG) private config: IAppConfig,
               private ng2cable: Ng2Cable, private broadcaster: Broadcaster) {
-    this.cableHost = 'https://solarpi.herokuapp.com/cable'; //this.config.apiEndpoint.replace('http', 'ws').replace('https', 'ws');
+    // this.cableHost = 'https://solarpi.herokuapp.com/cable'; //this.config.apiEndpoint.replace('http', 'ws').replace('https', 'ws');
+    this.cableHost = 'https://localhost:3000/cable';
     this.initWebsock();
   }
 
@@ -36,7 +37,7 @@ export class WalletPage {
     this.ng2cable.subscribe(this.cableHost, 'WalletChannel');
     //By default event name is 'channel name'. But you can pass from backend field { action: 'MyEventName'}
 
-    this.broadcaster.on<string>('WalletChannel').subscribe(
+    this.broadcaster.on<string>('WalletChannelTest').subscribe(
       message => {
         console.log(message);
       }

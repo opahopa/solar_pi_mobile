@@ -1,0 +1,30 @@
+<!--
+  Generated template for the EmailLoginPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <nav-header-text [title]="'Log in'"></nav-header-text>
+</ion-header>
+
+
+<ion-content padding>
+  <form (ngSubmit)="f.form.valid && doLogin()" #f="ngForm" padding-top novalidate>
+    <ion-list class="items-middle" text-center>
+      <ion-item>
+        <ion-icon item-left name="mail" color="light-grey"></ion-icon>
+        <ion-label color="light-grey" floating>Email</ion-label>
+        <ion-input type="email" [(ngModel)]="credentials.email" name="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon item-left name="lock" color="light-grey"></ion-icon>
+        <ion-label color="light-grey" floating>Password</ion-label>
+        <ion-input type="password" [(ngModel)]="credentials.password" name="password"></ion-input>
+      </ion-item>
+      <ion-buttons padding-top>
+        <button ion-button full round>Login</button>
+      </ion-buttons>
+    </ion-list>
+  </form>
+</ion-content>

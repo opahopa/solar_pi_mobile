@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 
 //components
-import { NavSidemenuComponentModule }  from '../components/nav-sidemenu/nav-sidemenu.module'
+import { NavSidemenuComponentModule }  from '../../components/nav-sidemenu/nav-sidemenu.module'
+import {DummyDataProvider} from "../../providers/dummydata";
+import {StatsProvider} from "../../providers/stats/stats";
 
 @NgModule({
   imports: [NavSidemenuComponentModule],
@@ -12,7 +14,8 @@ export class CoreModule {
     return {
       ngModule: CoreModule,
       providers: [
-
+        StatsProvider,
+        DummyDataProvider,
       ]
     }
   }
