@@ -6,13 +6,18 @@ import { MyApp } from './app.component';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ChartsModule } from 'ng2-charts';
-import {CoreModule} from "./core.module";
-import { StatsProvider } from '../providers/stats/stats';
-import {DummyDataProvider} from "../providers/dummydata";
+import {CoreModule} from "./core/core.module";
 import {APP_CONFIG, AppConfig} from "./app.config";
-import {HttpModule} from "@angular/http";
+import {Http, HttpModule, RequestOptions, XHRBackend} from "@angular/http";
 import {Ng2CableModule} from "ng2-cable";
-import { WalletProvider } from '../providers/wallet/wallet';
+
+import {LoadingService} from "../services/loading-service";
+import {MyHttpWrapper} from "./core/my-http.extend";
+import {IonicStorageModule} from "@ionic/storage";
+
+export function httpInterceptorFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions, loadingService: LoadingService) {
+  return new MyHttpWrapper(xhrBackend, requestOptions, loadingService);
+}
 
 @NgModule({
   declarations: [
@@ -24,6 +29,7 @@ import { WalletProvider } from '../providers/wallet/wallet';
     Ng2CableModule,
     CoreModule.forRoot(),
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
     ChartsModule
   ],
   bootstrap: [IonicApp],
@@ -35,10 +41,11 @@ import { WalletProvider } from '../providers/wallet/wallet';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     {provide: APP_CONFIG, useValue: AppConfig},
-    StatsProvider,
-    DummyDataProvider,
-    StatsProvider,
-    WalletProvider
+    {
+      provide: Http,
+      useFactory: httpInterceptorFactory,
+      deps: [XHRBackend, RequestOptions, LoadingService]
+    }
   ]
 })
 export class AppModule {}

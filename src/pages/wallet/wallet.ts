@@ -23,7 +23,7 @@ export class WalletPage {
   balance: number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, @Inject(APP_CONFIG) private config: IAppConfig,
-              private ng2cable: Ng2Cable, private broadcaster: Broadcaster, private walletProvider: WalletProvider) {
+          private ng2cable: Ng2Cable, private broadcaster: Broadcaster, private walletProvider: WalletProvider) {
     this.cableHost = this.config.apiEndpoint + '/cable';
     this.initWebsock();
   }
