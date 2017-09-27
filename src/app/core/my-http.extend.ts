@@ -14,7 +14,7 @@ import {LoadingService} from "../../services/loading-service";
 export class MyHttpWrapper extends Http {
 
 
-  constructor(connectionBackend: ConnectionBackend, requestOptions: RequestOptions, public loadingService: LoadingService, public storage: Storage) {
+  constructor(connectionBackend: ConnectionBackend, requestOptions: RequestOptions, public loadingService: LoadingService) {
     super(connectionBackend, requestOptions);
   }
 
@@ -57,19 +57,19 @@ export class MyHttpWrapper extends Http {
 
 
   private getRequestOptionArgs(options?: RequestOptionsArgs) : RequestOptionsArgs {
-    return this.storage.get('jwt_token').then((token) => {
+    // return this.storage.get('jwt_token').then((token) => {
       if (options == null) {
         options = new RequestOptions();
       }
-      if (options.headers == null) {
-        options.headers = new Headers();
-      }
-      if (token !== null) {
-        options.headers.append('Authorization', 'Bearer ' + token);
-      }
+      // if (options.headers == null) {
+      //   options.headers = new Headers();
+      // }
+      // if (token !== null) {
+      //   options.headers.append('Authorization', 'Bearer ' + token);
+      // }
       options.headers.append('Content-Type', 'application/json');
 
       return options;
-    });
+    // });
   }
 }

@@ -6,8 +6,8 @@ import {
 import { Storage } from '@ionic/storage';
 
 import {UserData} from "../../../app/core/user-data";
-import {AuthFirebaseServiceProvider} from "../../../providers/api/auth/auth-firebase-service";
 import {LoadingService} from "../../../services/loading-service";
+import {AuthServiceProvider} from "../../../services/auth-service";
 
 
 /**
@@ -29,69 +29,31 @@ export class LoginModalPage {
     google: ''
   };
 
-  constructor(private authFbService: AuthFirebaseServiceProvider, public viewCtrl: ViewController, public navCtrl: NavController,private toastCtrl: ToastController
-    ,private storage: Storage,private userData: UserData, public loadingService: LoadingService) {
+  constructor(public viewCtrl: ViewController, public navCtrl: NavController,private toastCtrl: ToastController
+    ,private storage: Storage,private userData: UserData, public loadingService: LoadingService, private authService: AuthServiceProvider) {
   }
 
 
   fbLogin() {
     this.loadingService.show();
-
-    this.authFbService.fbLogin().then((res)=>{
-        if(!res.user) {
-          this.presentToast("Login Failed. Try Later.", "toast-error");
-          this.loadingService.hide();
-        }
-        else {
-          this.authFbService.getUserToken().then((token)=>{
-            this.authFbService.confirmFirebaseAuth(res, token).subscribe((data)=>{
-              this._parseAuthConfirm(data);
-              this.storage.set('last_login:social:fb_name', res.user.displayName);
-              this.loadingService.hide();
-            })
-          })
-        }
-      },
-      (err)=>{
-        console.log(err);
-        this.presentToast("Login Failed. Please try again Later.", "toast-error");
-        this.loadingService.hide();
-      }
-    );
+    this.authService.fbLogin().then(success => {
+      console.log("RESULT: " + JSON.stringify(success));
+      this.loadingService.hide();
+    }, error => {
+      console.log("ERROR: ", error);
+      this.loadingService.hide();
+    });
   }
 
   googleLogin() {
     this.loadingService.show();
 
-    this.authFbService.googleLogin().then((res)=>{
-      console.log(res)
-
-        if(!res.user) {
-          this.presentToast("Login Failed. Try Later.", "toast-error");
-          this.loadingService.hide();
-        }
-        else {
-          this.authFbService.getUserToken().then((token)=>{
-            this.authFbService.confirmFirebaseAuth(res, token).subscribe((data)=>{
-              this._parseAuthConfirm(data);
-              this.storage.set('last_login:social:google_name', res.user.displayName);
-              this.loadingService.hide();
-            })
-          })
-        }
-      },
-      (err)=>{
-        console.log(err)
-        this.presentToast("Login Failed. Please try again Later.", "toast-error");
-        this.loadingService.hide();
-      }
-    );
   }
 
   _parseAuthConfirm(data){
     if (data.status === "success"){
       this.storage.set('jwt_token', data.token);
-      this.userData.setAuthState(true);
+      this.userData.isAuthenticated = true;
 
       this.presentToast("logged In", "toast-success");
 

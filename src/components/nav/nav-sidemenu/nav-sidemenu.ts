@@ -1,5 +1,6 @@
 import {Component, Input, ViewChild} from '@angular/core';
-import {MenuController, Nav} from "ionic-angular";
+import {MenuController, ModalController, Nav} from "ionic-angular";
+import { Storage } from '@ionic/storage';
 
 
 /**
@@ -16,13 +17,17 @@ export class NavSidemenuComponent {
   @ViewChild(Nav) nav: Nav;
   @Input() rootPage:any;
 
-  constructor(public menu: MenuController) {
-    console.log('Hello NavSidemenuComponent Component');
+  constructor(public menu: MenuController, public modalCtrl: ModalController, private storage: Storage) {
   }
 
 
   openPage(page) {
     this.menu.close();
     this.nav.setRoot(page);
+  }
+
+  openModal(page) {
+    let myModal = this.modalCtrl.create(page);
+    myModal.present();
   }
 }

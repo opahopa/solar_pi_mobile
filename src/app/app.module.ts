@@ -12,6 +12,7 @@ import {Http, HttpModule, RequestOptions, XHRBackend} from "@angular/http";
 import {Ng2CableModule} from "ng2-cable";
 import {LoadingService} from "../services/loading-service";
 import {MyHttpWrapper} from "./core/my-http.extend";
+import {IonicStorageModule} from "@ionic/storage";
 
 export function httpInterceptorFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions, loadingService: LoadingService) {
   return new MyHttpWrapper(xhrBackend, requestOptions, loadingService);
@@ -27,6 +28,7 @@ export function httpInterceptorFactory(xhrBackend: XHRBackend, requestOptions: R
     Ng2CableModule,
     CoreModule.forRoot(),
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
     ChartsModule
   ],
   bootstrap: [IonicApp],

@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
-import {AuthServiceProvider} from "../../../providers/api/auth/auth-service";
 import {AlertService} from "../../../services/alert-service/alert-service";
 import {UserData} from "../../../app/core/user-data";
+import {AuthServiceProvider} from "../../../services/auth-service";
 
 /**
  * Generated class for the EmailLoginPage page.
@@ -36,7 +36,7 @@ export class EmailLoginPage {
             this.storage.set('last_login:email', this.credentials.email);
             this.storage.set('jwt_token', data.token);
 
-            this.userData.setAuthState(true);
+            this.userData.isAuthenticated = true;
 
             this.navCtrl.setRoot('MainPage');
           } else if (data.message != null) {
