@@ -38,15 +38,15 @@ export class StatsPage {
       }
       case 'monthly': {
         this.chartType = ChartType.MONTHLY;
-        // this.statsProvider.getMonthlyData().subscribe((data)=>{
-        //   this.lineChartData = data.map(function(a) {return a.energy;});
-        //
-        //   let testSorted = data.sort((a, b) => a.time - b.time);
-        //   console.log(testSorted);
-        //
-        //   console.log(this.lineChartData);
-        // });
-        this.lineChartData = this.dummyData.getMonthlyChartData();
+        this.statsProvider.getMonthlyData().subscribe((data)=>{
+          this.lineChartData = data.map(function(a) {return a.energy;});
+
+          let testSorted = data.sort((a, b) => a.time - b.time);
+          console.log(testSorted);
+
+          console.log(this.lineChartData);
+        });
+        // this.lineChartData = this.dummyData.getMonthlyChartData();
         break;
       }
       case 'yearly': {
