@@ -39,9 +39,11 @@ export class LoginModalPage {
     this.authService.fbLogin().then(success => {
       console.log("RESULT: " + JSON.stringify(success));
       this.loadingService.hide();
+      this.presentToast("logged In", "toast-success");
     }, error => {
       console.log("ERROR: ", error);
       this.loadingService.hide();
+      this.presentToast("Login Failed. Try Later.", "toast-error");
     });
   }
 

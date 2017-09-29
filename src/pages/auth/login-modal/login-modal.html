@@ -26,7 +26,7 @@
       <button round class="fbLogin" ion-button icon-start (click)="fbLogin()">
         <ion-icon name="logo-facebook"></ion-icon><div class="socialLoginBtnText"> Continue {{ display_name?.fb ? 'as '+ display_name.fb : 'with Facebook' }} </div>
       </button>
-      <button round outline class="googleLogin" ion-button icon-start  (click)="googleLogin()">
+      <button round outline class="googleLogin" ion-button icon-start (click)="googleLogin()" color="red">
         <ion-icon name="logo-google"></ion-icon><div class="socialLoginBtnText"> Continue {{ display_name?.google ? 'as '+ display_name.google : 'with Google' }}</div>
       </button>
     </ion-buttons>
