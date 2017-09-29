@@ -61,9 +61,9 @@ export class MyHttpWrapper extends Http {
       if (options == null) {
         options = new RequestOptions();
       }
-      // if (options.headers == null) {
-      //   options.headers = new Headers();
-      // }
+      if (options.headers == null) {
+        options.headers = new Headers();
+      }
       // if (token !== null) {
       //   options.headers.append('Authorization', 'Bearer ' + token);
       // }

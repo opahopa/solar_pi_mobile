@@ -70,7 +70,9 @@ export class LoginModalPage {
   }
 
   confirmOauth(provider:string, token:string) {
-    this.authService.confirmProviderLogin(provider, token);
+    this.authService.confirmProviderLogin(provider, token).subscribe((data)=>{
+      console.log(data);
+    });
   }
 
   presentToast(msg, cssClass): Promise<any> {
