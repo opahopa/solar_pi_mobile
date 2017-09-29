@@ -8,6 +8,7 @@ import { Storage } from '@ionic/storage';
 import {UserData} from "../../../app/core/user-data";
 import {LoadingService} from "../../../services/loading-service";
 import {AuthServiceProvider} from "../../../services/auth-service";
+import {DeviseAuthServiceProvider} from "../../../services/devise-auth-service";
 
 
 /**
@@ -40,6 +41,8 @@ export class LoginModalPage {
       console.log("RESULT: " + JSON.stringify(success));
       this.loadingService.hide();
       this.presentToast("logged In", "toast-success");
+
+      this.confirmOauth('facebook', success['access_token']);
     }, error => {
       console.log("ERROR: ", error);
       this.loadingService.hide();
@@ -64,6 +67,10 @@ export class LoginModalPage {
     else {
       this.presentToast("Login Failed. Try Later.", "toast-error");
     }
+  }
+
+  confirmOauth(provider:string, token:string) {
+    this.authService.confirmProviderLogin(provider, token);
   }
 
   presentToast(msg, cssClass): Promise<any> {

@@ -26,9 +26,9 @@ export class AuthServiceProvider {
   private oauth = new OauthCordova();
   // private oauth = new OauthBrowser();
   private fBprovider = new Facebook({
-  clientId: "862087237254270",
-  appScope: ['email']
-});
+    clientId: "862087237254270",
+    appScope: ['email']
+  });
 
   constructor(public http: Http, @Inject(APP_CONFIG) private config: IAppConfig) {
   }
@@ -49,6 +49,22 @@ export class AuthServiceProvider {
 
   fbLogin() {
     return this.oauth.logInVia(this.fBprovider);
+  }
+
+  confirmProviderLogin(name:string, token: string){
+    let params = {
+      provider: name,
+      token: token
+    }
+
+    switch (name) {
+      case 'facebook':
+        return this.http.post(this.config.apiEndpoint + 'authentication/token_sign_in', params)
+          .map(res => res.json())
+          .catch((err:Response) => {
+            return Observable.throw(err.json());
+          });
+    }
   }
 
 

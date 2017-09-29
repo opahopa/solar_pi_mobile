@@ -10,6 +10,7 @@ import {CoreModule} from "./core/core.module";
 import {APP_CONFIG, AppConfig} from "./app.config";
 import {Http, HttpModule, RequestOptions, XHRBackend} from "@angular/http";
 import {Ng2CableModule} from "ng2-cable";
+import { Angular2TokenService } from 'angular2-token-ionic3';
 
 import {LoadingService} from "../services/loading-service";
 import {MyHttpWrapper} from "./core/my-http.extend";
@@ -45,7 +46,8 @@ export function httpInterceptorFactory(xhrBackend: XHRBackend, requestOptions: R
       provide: Http,
       useFactory: httpInterceptorFactory,
       deps: [XHRBackend, RequestOptions, LoadingService]
-    }
+    },
+    [ Angular2TokenService ]
   ]
 })
 export class AppModule {}

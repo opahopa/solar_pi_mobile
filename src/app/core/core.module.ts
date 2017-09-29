@@ -9,6 +9,7 @@ import {StatsProvider} from "../../providers/stats/stats";
 import {LoadingService} from "../../services/loading-service";
 import {UserData} from "./user-data";
 import {AuthServiceProvider} from "../../services/auth-service";
+import {DeviseAuthServiceProvider} from "../../services/devise-auth-service";
 
 @NgModule({
   imports: [NavSidemenuComponentModule],
@@ -23,6 +24,7 @@ export class CoreModule {
         DummyDataProvider,
         LoadingService,
         AuthServiceProvider,
+        DeviseAuthServiceProvider,
 
         UserData
       ]
