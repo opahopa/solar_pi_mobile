@@ -5,18 +5,17 @@ import 'rxjs/add/operator/catch';
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/observable/throw';
 import {APP_CONFIG, IAppConfig} from "../app/app.config";
-import {Angular2TokenService} from "angular2-token-ionic3";
 
 @Injectable()
 export class DeviseAuthServiceProvider {
 
 
-  constructor(public http: Http, @Inject(APP_CONFIG) private config: IAppConfig, private tokenService: Angular2TokenService) {
+  constructor(public http: Http, @Inject(APP_CONFIG) private config: IAppConfig) {
 
     //newWindow for ionic serve
-    this.tokenService.init({
-        oAuthWindowType: 'newWindow',
-    });
+    // this.tokenService.init({
+    //     oAuthWindowType: 'newWindow',
+    // });
   }
 
   login(credentials) {
@@ -34,9 +33,9 @@ export class DeviseAuthServiceProvider {
   }
 
   fbLogin() {
-    this.tokenService.signInOAuth(
-      'facebook'
-    );
+    // this.tokenService.signInOAuth(
+    //   'facebook'
+    // );
   }
 
 }
